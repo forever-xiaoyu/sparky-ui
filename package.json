@@ -1,13 +1,12 @@
 {
-  "name": "vue-project",
-  "version": "0.0.0",
+  "name": "@sparkyie/sparky-vue",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "vite build",
     "preview": "vite preview",
-    "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
     "format": "prettier --write src/"
