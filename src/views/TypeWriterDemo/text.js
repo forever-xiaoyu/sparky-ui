@@ -17,6 +17,10 @@ export const testArrayText = [
     }
 ]
 
+export const testVerbatimText = `
+<span style="font-weight: bold;">typeWriter</span> 是一个打字机模式的工具类，可以通过<span style="color:red">实例化该工具类配合 v-html 实现</span>打字机模式，同时可以对打字频率进行控制，出打印字符串外还支持数组的打印。在你的 Vue 组件中导入并使用 typeWriter 工具类。
+`
+
 // export const testText = `
 // safasf 
 

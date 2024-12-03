@@ -10,12 +10,14 @@ export default class TypeWriter {
     constructor(speed = 40, paraKey = '') {
         this.speed = speed
         this.paraKey = paraKey
+        this.tag = ''
     }
 
     /**
      * @description 开始打字机模式
      * @param {string} text - 要打印的文本 
      * @param {Object} options - 打印选项
+     * @param {Boolean} options.verbatim - 是否为逐字打印
      * @param {Function} options.output - 输出字符回调
      * @param {Function} options.finish - 打印完成回调
      */
@@ -23,15 +25,18 @@ export default class TypeWriter {
         Object.assign(this, options)
         this.charIndex = 0
         this.index = 0
-        this.tag = ''
         this.isGenerating = true
         // this.text = md.render(text)
         this.text = text
-        this.type()
+        if (this.verbatim) {
+            this.typeVerbatim()
+        } else {
+            this.type()
+        }
     }
 
     /**
-     * @description 使用打字机模式打印
+     * @description 使用打字机模式打印一段内容
      * @private
      */
     type() {
@@ -99,6 +104,30 @@ export default class TypeWriter {
                 this.isGenerating = false
                 this.finish()
             }
+        }
+    }
+
+    /**
+     * @description 使用打字机模式逐字打印字符
+     * @private
+     */
+    typeVerbatim() {
+        let char = this.text
+        if (typeof char == 'string') {
+            // 匹配标签，直接添加整个标签，防止被解析到页面中
+            if (char == '>') {
+                this.tag += char
+                this.output(this.tag)
+                this.tag = ''
+            } else if (char == '<' || this.tag) {
+                // 当前标签未结束，继续添加
+                this.tag += char
+            } else {
+                this.output(char)
+            }
+        } else {
+            this.isGenerating = false
+            this.finish()
         }
     }
 }

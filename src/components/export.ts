@@ -1,5 +1,5 @@
 import ThreeDCarousel from './Carousel/ThreeDCarousel.vue'
-import ToolBar from './Carousel/ToolBar.vue'
+import ToolBar from './ToolBar/ToolBar.vue'
 
 export {
     ThreeDCarousel,

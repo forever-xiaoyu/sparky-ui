@@ -1,7 +1,8 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+
+const mode = process.env.NODE_ENV
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,6 +12,24 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+  },
+
+  build: {
+    rollupOptions: {
+      input: mode == 'development' ? './src/main.ts' : './src/index.ts',
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue',
+        },
+      },
+    },
+    lib: {
+      entry: './src/index.ts', // 入口文件
+      name: 'sparkyie/sparky-vue',
+      fileName: 'sparkyie-vue',
+      formats: ['es'],
+    }
   },
 
   server: {
