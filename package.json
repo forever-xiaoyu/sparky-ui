@@ -1,6 +1,6 @@
 {
-  "name": "@sparkyie/sparky-vue",
-  "version": "0.0.3",
+  "name": "@sparkyie/vue",
+  "version": "0.0.1",
   "description": "this is a description",
   "main": "dist/sparkyie-vue.mjs",
   "scripts": {
